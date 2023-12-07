@@ -7,8 +7,9 @@ router.get('/',async (req, res) => {
   try {
     const getallcategory = await Category.findAll({
       include:[Product]
-      
+
     })
+    res.status(200).json(getallcategory)
   } catch (error) {
     res.status(500).json(error)
   }
@@ -18,7 +19,12 @@ router.get('/',async (req, res) => {
 
 router.get('/:id', async(req, res) => {
   try {
-    
+    const getonecategory = await Category.findOne({
+      where:{
+        id:req.params.id
+      }
+    })
+    res.json(getonecategory)
   } catch (error) {
     res.status(500).json(error)
   }
